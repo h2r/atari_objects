@@ -19,8 +19,11 @@ import game_objects.ObjectVisualizer;
  */
 public class RandomAgent {
     public static void main(String[] args) {
-        String alePath = "/home/maroderi/projects/Arcade-Learning-Environment/ale";
-        String romPath = "/home/maroderi/projects/atari_roms/pong.bin";
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Usage: <path/to/ale/executable> <path/to/rom/file>");
+        }
+        String alePath = args[0];
+        String romPath = args[1];
 
         // Create the ALE domain
         ALEDomainGenerator domGen = new ALEDomainGenerator();
@@ -42,7 +45,7 @@ public class RandomAgent {
         VisualExplorer objectVis = new VisualExplorer(domain, env, ObjectVisualizer.create(ObjectConstants.PONG_SPRITE_TEMPLATES));
         objectVis.initGUI();
 
-        // Run the policy indefinitely
+        // Run the policy
         for (int i = 0; i < 10000; i++) {
             if (env.isInTerminalState()) {
                 env.resetEnvironment();
