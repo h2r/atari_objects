@@ -60,7 +60,7 @@ public class DataCollection {
             Episode ep = PolicyUtils.rollout(p, env, 1);
             ALEState aleState = (ALEState) ep.state(1);
 
-            String imageName = String.format("screen_%d",i);
+            String imageName = String.format("screen_%d.png",i);
             OpenCVIO.saveMat(aleState.getScreen(), Paths.get(dataPath, imageName).toString());
 
             List<Sprite> sprites = SpriteFinder.findSprites(aleState, templates);
@@ -93,7 +93,7 @@ public class DataCollection {
                 out.printf("-1,-1,");
             }
 
-            out.printf("%s,%f,%b,%s.png\n",
+            out.printf("%s,%f,%b,%s\n",
                     ep.action(0).actionName(), ep.reward(1), env.isInTerminalState(),
                     imageName);
 
